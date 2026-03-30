@@ -184,14 +184,14 @@ var loaded = false;
 function todayKey(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
 function getM(){return monsters[Math.min(st.mIdx,monsters.length-1)];}
 
-async function loadData(){
+function loadData(){
   try{
-    var sr = await window.storage.get('sakura_st');
-    if(sr && sr.value) st = JSON.parse(sr.value);
+    var srData = localStorage.getItem('sakura_st');
+    if(srData) st = JSON.parse(srData);
   }catch(e){}
   try{
-    var dr = await window.storage.get('sakura_days');
-    if(dr && dr.value) checkedDays = JSON.parse(dr.value);
+    var drData = localStorage.getItem('sakura_days');
+    if(drData) checkedDays = JSON.parse(drData);
   }catch(e){}
   loaded = true;
   updateUI();
@@ -199,9 +199,9 @@ async function loadData(){
   buildCalendar();
 }
 
-async function persist(){
-  try{ await window.storage.set('sakura_st', JSON.stringify(st)); }catch(e){}
-  try{ await window.storage.set('sakura_days', JSON.stringify(checkedDays)); }catch(e){}
+function persist(){
+  try{ localStorage.setItem('sakura_st', JSON.stringify(st)); }catch(e){}
+  try{ localStorage.setItem('sakura_days', JSON.stringify(checkedDays)); }catch(e){}
 }
 
 function updateUI(){
