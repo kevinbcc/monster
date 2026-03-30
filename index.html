@@ -5,66 +5,79 @@
   :root{
     --sk:#FFB7C5;--sk2:#FF8FAB;--pt:#FFE4EE;--pt2:#FFF0F5;
     --txt:#5C3D4E;--txt2:#9B7088;--txt3:#C4A0B5;
-    --card:#FFFAFC;--pu:#C4A0E0;--gr:#7EC8A0;--grl:#C8F0DC;
+    --card:#FFFAFC;--pu:#C4A0E0;--gr:#7EC8A0;
   }
-  body{font-family:'Nunito',sans-serif;background:var(--pt2);color:var(--txt);min-height:100vh}
-  .wrap{max-width:390px;margin:0 auto;background:var(--pt2);position:relative;min-height:100vh;overflow:hidden}
+  body{font-family:'Nunito',sans-serif;background:var(--pt2);color:var(--txt)}
+  .wrap{width:100%;max-width:600px;margin:0 auto;background:var(--pt2);position:relative;overflow:hidden}
   .petals-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
   .pf{position:absolute;width:9px;height:9px;background:var(--sk);border-radius:50% 0 50% 0;animation:fall linear infinite}
-  @keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:0.55}100%{transform:translateY(900px) rotate(400deg);opacity:0}}
-  .content{position:relative;z-index:1;padding:20px 20px 40px;display:flex;flex-direction:column;align-items:center;gap:20px}
+  @keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:0.55}100%{transform:translateY(110vh) rotate(400deg);opacity:0}}
+
+  .content{position:relative;z-index:1;padding:clamp(12px,3vw,24px);display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.5vw,20px)}
+
   .header{width:100%;display:flex;justify-content:space-between;align-items:center}
-  .title{font-size:18px;font-weight:900;color:var(--sk2)}
-  .title small{display:block;font-size:11px;font-weight:700;color:var(--txt3);margin-top:1px}
-  .streak{background:var(--pt);border-radius:14px;padding:6px 16px;text-align:center;border:1.5px solid rgba(255,183,197,0.4)}
-  .streak-n{font-size:22px;font-weight:900;color:var(--sk2);line-height:1}
-  .streak-l{font-size:10px;font-weight:700;color:var(--txt3)}
-  .monster-box{width:100%;background:var(--card);border-radius:24px;border:1.5px solid rgba(255,183,197,0.3);padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px}
-  .hp-row{width:100%;display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:var(--txt2)}
-  .hp-track{width:100%;height:14px;background:rgba(255,183,197,0.2);border-radius:20px;border:1.5px solid rgba(255,143,171,0.25);overflow:hidden}
+  .title{font-size:clamp(15px,4vw,20px);font-weight:900;color:var(--sk2)}
+  .title small{display:block;font-size:clamp(10px,2.2vw,12px);font-weight:700;color:var(--txt3);margin-top:1px}
+  .streak{background:var(--pt);border-radius:14px;padding:clamp(4px,1.2vw,8px) clamp(10px,3vw,18px);text-align:center;border:1.5px solid rgba(255,183,197,0.4);flex-shrink:0}
+  .streak-n{font-size:clamp(18px,5vw,26px);font-weight:900;color:var(--sk2);line-height:1}
+  .streak-l{font-size:clamp(9px,2vw,11px);font-weight:700;color:var(--txt3)}
+
+  .monster-box{width:100%;background:var(--card);border-radius:clamp(16px,4vw,24px);border:1.5px solid rgba(255,183,197,0.3);padding:clamp(14px,3.5vw,24px);display:flex;flex-direction:column;align-items:center;gap:clamp(8px,2vw,12px)}
+  .hp-row{width:100%;display:flex;justify-content:space-between;font-size:clamp(10px,2.5vw,13px);font-weight:800;color:var(--txt2)}
+  .hp-track{width:100%;height:clamp(10px,2.5vw,16px);background:rgba(255,183,197,0.2);border-radius:20px;border:1.5px solid rgba(255,143,171,0.25);overflow:hidden}
   .hp-fill{height:100%;border-radius:20px;background:var(--sk2);transition:width 0.7s cubic-bezier(.34,1.56,.64,1);position:relative}
-  .hp-fill::after{content:'';position:absolute;top:2px;left:6px;right:6px;height:4px;background:rgba(255,255,255,0.45);border-radius:10px}
-  .monster-wrap{position:relative;width:160px;height:160px;cursor:pointer;user-select:none}
+  .hp-fill::after{content:'';position:absolute;top:2px;left:6px;right:6px;height:35%;background:rgba(255,255,255,0.45);border-radius:10px}
+
+  .monster-wrap{position:relative;cursor:pointer;user-select:none;width:clamp(120px,35vw,200px);height:clamp(120px,35vw,200px)}
   .monster-wrap:active svg{transform:scale(0.9)}
-  svg{transition:transform 0.1s;display:block}
+  svg{transition:transform 0.1s;display:block;width:100%;height:100%}
   .monster-wrap.boing svg{animation:boing 0.4s cubic-bezier(.36,.07,.19,.97)}
   @keyframes boing{0%,100%{transform:translate(0,0)}20%{transform:translate(-5px,-3px) rotate(-4deg)}50%{transform:translate(5px,-2px) rotate(3deg)}80%{transform:translate(-3px,2px) rotate(-2deg)}}
-  .dmg-pop{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:20px;font-weight:900;color:var(--sk2);pointer-events:none;opacity:0;white-space:nowrap;z-index:10}
+
+  .dmg-pop{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-size:clamp(16px,4.5vw,24px);font-weight:900;color:var(--sk2);pointer-events:none;opacity:0;white-space:nowrap;z-index:10}
   .dmg-pop.go{animation:popfloat 0.7s ease forwards}
-  @keyframes popfloat{0%{opacity:1;transform:translateX(-50%) scale(0.7) translateY(0)}50%{opacity:1;transform:translateX(-50%) scale(1.2) translateY(-24px)}100%{opacity:0;transform:translateX(-50%) scale(1) translateY(-48px)}}
-  .monster-lbl{font-size:12px;font-weight:800;color:var(--txt3)}
-  .tap-hint{font-size:11px;color:var(--txt3);font-weight:700}
-  .checkin-box{width:100%;background:var(--card);border-radius:24px;border:1.5px solid rgba(255,183,197,0.3);padding:22px 20px;display:flex;flex-direction:column;align-items:center;gap:14px}
-  .checkin-lbl{font-size:13px;font-weight:800;color:var(--txt2)}
-  .encourage{width:100%;padding:14px 16px;background:var(--pt);border-radius:14px;font-size:14px;font-weight:700;color:var(--txt2);line-height:1.6;text-align:center;border:1px solid rgba(255,183,197,0.25);min-height:54px;display:flex;align-items:center;justify-content:center}
-  .checkin-btn{width:100%;padding:18px;border-radius:18px;border:none;background:var(--sk2);color:white;font-family:'Nunito',sans-serif;font-size:17px;font-weight:900;cursor:pointer;transition:all 0.2s}
+  @keyframes popfloat{0%{opacity:1;transform:translateX(-50%) scale(0.7) translateY(0)}50%{opacity:1;transform:translateX(-50%) scale(1.2) translateY(-20px)}100%{opacity:0;transform:translateX(-50%) scale(1) translateY(-44px)}}
+
+  .monster-lbl{font-size:clamp(11px,2.5vw,13px);font-weight:800;color:var(--txt3)}
+  .tap-hint{font-size:clamp(10px,2.2vw,12px);color:var(--txt3);font-weight:700}
+
+  .checkin-box{width:100%;background:var(--card);border-radius:clamp(16px,4vw,24px);border:1.5px solid rgba(255,183,197,0.3);padding:clamp(16px,4vw,24px);display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2.5vw,16px)}
+  .checkin-lbl{font-size:clamp(12px,3vw,14px);font-weight:800;color:var(--txt2)}
+  .encourage{width:100%;padding:clamp(10px,2.5vw,16px);background:var(--pt);border-radius:14px;font-size:clamp(13px,3.2vw,15px);font-weight:700;color:var(--txt2);line-height:1.6;text-align:center;border:1px solid rgba(255,183,197,0.25);min-height:50px;display:flex;align-items:center;justify-content:center}
+  .checkin-btn{width:100%;padding:clamp(14px,3.5vw,20px);border-radius:18px;border:none;background:var(--sk2);color:white;font-family:'Nunito',sans-serif;font-size:clamp(15px,4vw,19px);font-weight:900;cursor:pointer;transition:all 0.2s}
   .checkin-btn:active{transform:scale(0.97)}
   .checkin-btn.done-state{background:var(--gr);pointer-events:none}
-  .calendar-box{width:100%;background:var(--card);border-radius:24px;border:1.5px solid rgba(255,183,197,0.3);padding:18px 16px}
-  .cal-title{font-size:11px;font-weight:800;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;text-align:center}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-  .cal-day{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--txt3);background:rgba(255,183,197,0.1)}
-  .cal-day.header-d{font-size:10px;font-weight:700;background:transparent;color:var(--txt3)}
+
+  .calendar-box{width:100%;background:var(--card);border-radius:clamp(16px,4vw,24px);border:1.5px solid rgba(255,183,197,0.3);padding:clamp(14px,3.5vw,20px)}
+  .cal-title{font-size:clamp(10px,2.2vw,12px);font-weight:800;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:clamp(8px,2vw,14px);text-align:center}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(4px,1.2vw,8px)}
+  .cal-day{aspect-ratio:1;border-radius:clamp(6px,1.5vw,12px);display:flex;align-items:center;justify-content:center;font-size:clamp(10px,2.5vw,13px);font-weight:800;color:var(--txt3);background:rgba(255,183,197,0.1)}
+  .cal-day.header-d{font-size:clamp(9px,2vw,11px);font-weight:700;background:transparent;color:var(--txt3)}
   .cal-day.done{background:var(--pt);font-size:0;position:relative}
-  .cal-day.done::after{content:'🌸';font-size:13px;position:absolute}
+  .cal-day.done::after{content:'🌸';font-size:clamp(10px,2.8vw,15px);position:absolute}
   .cal-day.today{border:2px solid var(--sk2)}
   .cal-day.future{opacity:0.25}
-  .lvlup-overlay{position:fixed;inset:0;background:rgba(92,61,78,0.55);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s}
-  .lvlup-overlay.show{opacity:1;pointer-events:all}
-  .lvlup-card{background:var(--card);border-radius:24px;padding:32px 28px;text-align:center;border:2px solid var(--pu);max-width:290px;width:90%;position:relative;animation:popcard 0.4s cubic-bezier(.36,.07,.19,.97)}
-  @keyframes popcard{0%{transform:scale(0.6);opacity:0}70%{transform:scale(1.04)}100%{transform:scale(1)}}
-  .lv-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:24px}
+
+  .overlay{position:absolute;inset:0;background:rgba(92,61,78,0.55);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s;min-height:100%}
+  .overlay.show{opacity:1;pointer-events:all}
+  .lv-card{background:var(--card);border-radius:clamp(16px,4vw,24px);padding:clamp(24px,6vw,36px) clamp(20px,5vw,32px);text-align:center;border:2px solid var(--pu);width:min(290px,85%);position:relative}
+  .lv-petals{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit}
   .fp2{position:absolute;width:10px;height:10px;border-radius:50% 0 50% 0;animation:fpup 1.4s ease forwards}
   @keyframes fpup{0%{opacity:0.9;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(-110px) rotate(200deg)}}
-  .lv-icon{font-size:44px;margin-bottom:6px}
-  .lv-title{font-size:22px;font-weight:900;color:var(--pu);margin-bottom:6px}
-  .lv-sub{font-size:13px;font-weight:700;color:var(--txt2);margin-bottom:18px;line-height:1.5}
-  .lv-btn{padding:10px 32px;border-radius:20px;border:none;background:var(--pu);color:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+  .lv-icon{font-size:clamp(36px,9vw,52px);margin-bottom:6px}
+  .lv-title{font-size:clamp(18px,5vw,24px);font-weight:900;color:var(--pu);margin-bottom:6px}
+  .lv-sub{font-size:clamp(12px,3vw,14px);font-weight:700;color:var(--txt2);margin-bottom:clamp(14px,3.5vw,20px);line-height:1.5}
+  .lv-btn{padding:clamp(8px,2vw,12px) clamp(24px,6vw,36px);border-radius:20px;border:none;background:var(--pu);color:white;font-family:'Nunito',sans-serif;font-size:clamp(12px,3vw,14px);font-weight:800;cursor:pointer}
+
+  @media(min-width:480px){
+    .monster-wrap{width:clamp(160px,28vw,200px);height:clamp(160px,28vw,200px)}
+  }
 </style>
 
-<div class="wrap">
+<div class="wrap" id="mainWrap">
   <div class="petals-bg" id="petalsArea"></div>
   <div class="content">
+
     <div class="header">
       <div class="title">櫻花斬妖帖<small id="dateStr">今日的挑戰</small></div>
       <div class="streak"><div class="streak-n" id="streakN">0</div><div class="streak-l">天連勝</div></div>
@@ -75,7 +88,7 @@
       <div class="hp-track"><div class="hp-fill" id="hpFill" style="width:100%"></div></div>
       <div class="monster-wrap" id="monsterWrap" onclick="tapMonster()">
         <div class="dmg-pop" id="dmgPop"></div>
-        <svg viewBox="0 0 160 160" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="80" cy="118" rx="40" ry="12" fill="rgba(255,183,197,0.18)"/>
           <circle cx="80" cy="92" r="36" fill="#FFD6E4"/>
           <circle cx="80" cy="88" r="30" fill="#FFEBF2"/>
@@ -116,15 +129,15 @@
       <div class="cal-grid" id="calGrid"></div>
     </div>
   </div>
-</div>
 
-<div class="lvlup-overlay" id="lvlupOverlay">
-  <div class="lvlup-card">
-    <div class="lv-petals" id="lvPetals"></div>
-    <div class="lv-icon">🌸</div>
-    <div class="lv-title" id="lvTitle">升級了！</div>
-    <div class="lv-sub" id="lvSub">你越來越厲害了！</div>
-    <button class="lv-btn" onclick="closeLvup()">繼續加油！</button>
+  <div class="overlay" id="overlay">
+    <div class="lv-card">
+      <div class="lv-petals" id="lvPetals"></div>
+      <div class="lv-icon">🌸</div>
+      <div class="lv-title" id="lvTitle">升級了！</div>
+      <div class="lv-sub" id="lvSub">你越來越厲害了！</div>
+      <button class="lv-btn" onclick="closeLvup()">繼續加油！</button>
+    </div>
   </div>
 </div>
 
@@ -152,195 +165,169 @@ var monsters = [
   {name:'Lv.5 焦慮魔王', maxHp:1000, tapDmg:18, checkinDmg:180}
 ];
 
-function loadState() {
-  try { var s = localStorage.getItem('sakura_st'); return s ? JSON.parse(s) : {mIdx:0, mHp:150, streak:0}; }
-  catch(e) { return {mIdx:0, mHp:150, streak:0}; }
-}
-function saveState(s) { try { localStorage.setItem('sakura_st', JSON.stringify(s)); } catch(e) {} }
-function loadDays() {
-  try { var d = localStorage.getItem('sakura_days'); return d ? JSON.parse(d) : []; }
-  catch(e) { return []; }
-}
-function saveDays(a) { try { localStorage.setItem('sakura_days', JSON.stringify(a)); } catch(e) {} }
-function todayKey() { var d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+var st = {mIdx:0, mHp:150, streak:0};
+var checkedDays = [];
+var loaded = false;
 
-var st = loadState();
-var checkedDays = loadDays();
+function todayKey(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function getM(){return monsters[Math.min(st.mIdx,monsters.length-1)];}
 
-function getM() { return monsters[Math.min(st.mIdx, monsters.length-1)]; }
-
-function updateUI() {
-  var m = getM();
-  var pct = Math.max(0, Math.round(st.mHp / m.maxHp * 100));
-  document.getElementById('hpFill').style.width = pct + '%';
-  document.getElementById('hpTxt').textContent = Math.max(0, st.mHp) + ' / ' + m.maxHp;
-  document.getElementById('monsterLbl').textContent = m.name;
-  document.getElementById('streakN').textContent = st.streak;
+async function loadData(){
+  try{
+    var sr = await window.storage.get('sakura_st');
+    if(sr && sr.value) st = JSON.parse(sr.value);
+  }catch(e){}
+  try{
+    var dr = await window.storage.get('sakura_days');
+    if(dr && dr.value) checkedDays = JSON.parse(dr.value);
+  }catch(e){}
+  loaded = true;
+  updateUI();
+  checkCheckinState();
+  buildCalendar();
 }
 
-function animDmg(n) {
-  var p = document.getElementById('dmgPop');
-  p.textContent = '-' + n + ' !';
+async function persist(){
+  try{ await window.storage.set('sakura_st', JSON.stringify(st)); }catch(e){}
+  try{ await window.storage.set('sakura_days', JSON.stringify(checkedDays)); }catch(e){}
+}
+
+function updateUI(){
+  var m=getM();
+  var pct=Math.max(0,Math.round(st.mHp/m.maxHp*100));
+  document.getElementById('hpFill').style.width=pct+'%';
+  document.getElementById('hpTxt').textContent=Math.max(0,st.mHp)+' / '+m.maxHp;
+  document.getElementById('monsterLbl').textContent=m.name;
+  document.getElementById('streakN').textContent=st.streak;
+}
+
+function checkCheckinState(){
+  if(checkedDays.indexOf(todayKey())!==-1){
+    var btn=document.getElementById('checkinBtn');
+    btn.classList.add('done-state');
+    btn.textContent='✓  今天已簽到！';
+  }
+}
+
+function animDmg(n){
+  var p=document.getElementById('dmgPop');
+  p.textContent='-'+n+' !';
   p.classList.remove('go');
   void p.offsetWidth;
   p.classList.add('go');
 }
 
-function shakeMonster() {
-  var w = document.getElementById('monsterWrap');
-  w.classList.remove('boing');
-  void w.offsetWidth;
-  w.classList.add('boing');
-  setTimeout(function(){ w.classList.remove('boing'); }, 450);
-  var mth = document.getElementById('mth');
+function shakeMonster(){
+  var w=document.getElementById('monsterWrap');
+  w.classList.remove('boing'); void w.offsetWidth; w.classList.add('boing');
+  setTimeout(function(){w.classList.remove('boing');},450);
+  var mth=document.getElementById('mth');
   mth.setAttribute('d','M73 100 Q80 96 87 100');
-  setTimeout(function(){ mth.setAttribute('d','M73 98 Q80 104 87 98'); }, 600);
-  var sw = document.getElementById('sweat');
+  setTimeout(function(){mth.setAttribute('d','M73 98 Q80 104 87 98');},600);
+  var sw=document.getElementById('sweat');
   sw.setAttribute('opacity','1');
-  setTimeout(function(){ sw.setAttribute('opacity','0'); }, 900);
+  setTimeout(function(){sw.setAttribute('opacity','0');},900);
 }
 
-function dealDamage(dmg) {
-  st.mHp = Math.max(0, st.mHp - dmg);
-  animDmg(dmg);
-  shakeMonster();
-  updateUI();
-  saveState(st);
-  if (st.mHp <= 0) { setTimeout(defeatMonster, 700); }
+function dealDamage(dmg){
+  st.mHp=Math.max(0,st.mHp-dmg);
+  animDmg(dmg); shakeMonster(); updateUI(); persist();
+  if(st.mHp<=0){setTimeout(defeatMonster,700);}
 }
 
-function tapMonster() {
-  dealDamage(getM().tapDmg);
-  spawnPetals(3);
-}
+function tapMonster(){dealDamage(getM().tapDmg); spawnPetals(3);}
 
-function defeatMonster() {
-  if (st.mIdx < monsters.length - 1) {
-    st.mIdx++;
-    st.mHp = getM().maxHp;
-    saveState(st);
-    updateUI();
-    showLvUp(false);
-  } else {
+function defeatMonster(){
+  if(st.mIdx<monsters.length-1){
+    st.mIdx++; st.mHp=getM().maxHp; persist(); updateUI(); showLvUp(false);
+  }else{
     showLvUp(true);
   }
 }
 
-function doCheckIn() {
-  var today = todayKey();
-  if (checkedDays.indexOf(today) !== -1) return;
+function doCheckIn(){
+  var today=todayKey();
+  if(checkedDays.indexOf(today)!==-1) return;
   checkedDays.push(today);
-  saveDays(checkedDays);
-
-  var yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  var yKey = yesterday.getFullYear() + '-' + (yesterday.getMonth()+1) + '-' + yesterday.getDate();
-  st.streak = checkedDays.indexOf(yKey) !== -1 ? st.streak + 1 : 1;
-
-  var btn = document.getElementById('checkinBtn');
-  btn.classList.add('done-state');
-  btn.textContent = '✓  今天已簽到！';
-
-  var msg = encouragements[Math.floor(Math.random() * encouragements.length)];
-  document.getElementById('encourageTxt').textContent = msg;
-
-  spawnPetals(14);
-  dealDamage(getM().checkinDmg);
-  buildCalendar();
+  var yest=new Date(); yest.setDate(yest.getDate()-1);
+  var yk=yest.getFullYear()+'-'+(yest.getMonth()+1)+'-'+yest.getDate();
+  st.streak=checkedDays.indexOf(yk)!==-1 ? st.streak+1 : 1;
+  persist();
+  var btn=document.getElementById('checkinBtn');
+  btn.classList.add('done-state'); btn.textContent='✓  今天已簽到！';
+  var msg=encouragements[Math.floor(Math.random()*encouragements.length)];
+  document.getElementById('encourageTxt').textContent=msg;
+  spawnPetals(14); dealDamage(getM().checkinDmg); buildCalendar();
 }
 
-function showLvUp(last) {
-  document.getElementById('lvTitle').textContent = last ? '你打倒焦慮魔王了！' : getM().name + ' 出現了！';
-  document.getElementById('lvSub').textContent = last
-    ? '所有焦慮都被你打跑了，你超棒的！🌸'
-    : '擊敗上一關！新的挑戰在等你～';
-  document.getElementById('lvlupOverlay').classList.add('show');
-  var lp = document.getElementById('lvPetals');
-  lp.innerHTML = '';
-  for (var i = 0; i < 14; i++) {
-    var p = document.createElement('div');
-    p.className = 'fp2';
-    p.style.left = (5 + Math.random()*90) + '%';
-    p.style.bottom = (Math.random()*30) + 'px';
-    p.style.animationDelay = (Math.random()*0.7) + 's';
-    p.style.background = Math.random() > 0.5 ? '#FFB7C5' : '#C4A0E0';
+function showLvUp(last){
+  document.getElementById('lvTitle').textContent=last?'你打倒焦慮魔王了！':getM().name+' 出現了！';
+  document.getElementById('lvSub').textContent=last?'所有焦慮都被你打跑了，你超棒的！🌸':'擊敗上一關！新的挑戰在等你～';
+  document.getElementById('overlay').classList.add('show');
+  var lp=document.getElementById('lvPetals'); lp.innerHTML='';
+  for(var i=0;i<14;i++){
+    var p=document.createElement('div'); p.className='fp2';
+    p.style.left=(5+Math.random()*90)+'%';
+    p.style.bottom=(Math.random()*30)+'px';
+    p.style.animationDelay=(Math.random()*0.7)+'s';
+    p.style.background=Math.random()>0.5?'#FFB7C5':'#C4A0E0';
     lp.appendChild(p);
   }
 }
 
-function closeLvup() {
-  document.getElementById('lvlupOverlay').classList.remove('show');
-}
+function closeLvup(){document.getElementById('overlay').classList.remove('show');}
 
-function spawnPetals(n) {
-  var bg = document.getElementById('petalsArea');
-  for (var i = 0; i < n; i++) {
-    var p = document.createElement('div');
-    p.className = 'pf';
-    p.style.left = (Math.random()*100) + '%';
-    p.style.animationDuration = (3 + Math.random()*3) + 's';
-    p.style.animationDelay = (Math.random()*0.8) + 's';
-    p.style.opacity = (0.25 + Math.random()*0.4);
+function spawnPetals(n){
+  var bg=document.getElementById('petalsArea');
+  for(var i=0;i<n;i++){
+    var p=document.createElement('div'); p.className='pf';
+    p.style.left=(Math.random()*100)+'%';
+    p.style.animationDuration=(3+Math.random()*3)+'s';
+    p.style.animationDelay=(Math.random()*0.8)+'s';
+    p.style.opacity=(0.25+Math.random()*0.4);
     bg.appendChild(p);
-    setTimeout(function(el){ return function(){ el.remove(); }; }(p), 6000);
+    setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el);};})(p),6000);
   }
 }
 
-function buildCalendar() {
-  var now = new Date();
-  var year = now.getFullYear();
-  var month = now.getMonth();
-  var todayDate = now.getDate();
-  var firstDay = new Date(year, month, 1).getDay();
-  var daysInMonth = new Date(year, month+1, 0).getDate();
-  var grid = document.getElementById('calGrid');
-  grid.innerHTML = '';
-  var headers = ['日','一','二','三','四','五','六'];
-  for (var h = 0; h < 7; h++) {
-    var hd = document.createElement('div');
-    hd.className = 'cal-day header-d';
-    hd.textContent = headers[h];
-    grid.appendChild(hd);
-  }
-  for (var b = 0; b < firstDay; b++) {
-    var blank = document.createElement('div');
-    blank.className = 'cal-day';
-    grid.appendChild(blank);
-  }
-  for (var d = 1; d <= daysInMonth; d++) {
-    var key = year + '-' + (month+1) + '-' + d;
-    var el = document.createElement('div');
-    var cls = 'cal-day';
-    if (checkedDays.indexOf(key) !== -1) cls += ' done';
-    else if (d === todayDate) cls += ' today';
-    else if (d > todayDate) cls += ' future';
-    el.className = cls;
-    if (checkedDays.indexOf(key) === -1) el.textContent = d;
+function buildCalendar(){
+  var now=new Date(), year=now.getFullYear(), month=now.getMonth(), todayDate=now.getDate();
+  var firstDay=new Date(year,month,1).getDay();
+  var daysInMonth=new Date(year,month+1,0).getDate();
+  var grid=document.getElementById('calGrid'); grid.innerHTML='';
+  ['日','一','二','三','四','五','六'].forEach(function(h){
+    var hd=document.createElement('div'); hd.className='cal-day header-d'; hd.textContent=h; grid.appendChild(hd);
+  });
+  for(var b=0;b<firstDay;b++){var bl=document.createElement('div');bl.className='cal-day';grid.appendChild(bl);}
+  for(var d=1;d<=daysInMonth;d++){
+    var key=year+'-'+(month+1)+'-'+d;
+    var el=document.createElement('div');
+    var cls='cal-day';
+    if(checkedDays.indexOf(key)!==-1) cls+=' done';
+    else if(d===todayDate) cls+=' today';
+    else if(d>todayDate) cls+=' future';
+    el.className=cls;
+    if(checkedDays.indexOf(key)===-1) el.textContent=d;
     grid.appendChild(el);
   }
 }
 
-function initDate() {
-  var d = new Date();
-  var days = ['日','一','二','三','四','五','六'];
-  document.getElementById('dateStr').textContent = (d.getMonth()+1) + '月' + d.getDate() + '日（週' + days[d.getDay()] + '）';
+function initDate(){
+  var d=new Date(), days=['日','一','二','三','四','五','六'];
+  document.getElementById('dateStr').textContent=(d.getMonth()+1)+'月'+d.getDate()+'日（週'+days[d.getDay()]+'）';
 }
 
-function initBgPetals() {
-  var bg = document.getElementById('petalsArea');
-  for (var i = 0; i < 7; i++) {
-    var p = document.createElement('div');
-    p.className = 'pf';
-    p.style.left = (Math.random()*100) + '%';
-    p.style.animationDuration = (5 + Math.random()*4) + 's';
-    p.style.animationDelay = (-Math.random()*7) + 's';
-    p.style.opacity = (0.15 + Math.random()*0.25);
+function initBgPetals(){
+  var bg=document.getElementById('petalsArea');
+  for(var i=0;i<8;i++){
+    var p=document.createElement('div'); p.className='pf';
+    p.style.left=(Math.random()*100)+'%';
+    p.style.animationDuration=(5+Math.random()*4)+'s';
+    p.style.animationDelay=(-Math.random()*8)+'s';
+    p.style.opacity=(0.15+Math.random()*0.25);
     bg.appendChild(p);
   }
 }
 
-initDate();
-initBgPetals();
-updateUI();
-buildCalendar();
+initDate(); initBgPetals(); loadData();
 </script>
