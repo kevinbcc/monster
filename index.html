@@ -263,15 +263,21 @@ function shakeMonster(){
   setTimeout(function(){sw.setAttribute('opacity','0');},900);
 }
 
+var isDefeating = false;
 function dealDamage(dmg){
+  if(isDefeating) return;
   st.mHp=Math.max(0,st.mHp-dmg);
   animDmg(dmg); shakeMonster(); updateUI(); persist();
-  if(st.mHp<=0){setTimeout(defeatMonster,700);}
+  if(st.mHp<=0){
+    isDefeating = true;
+    setTimeout(defeatMonster,700);
+  }
 }
 
-function tapMonster(){dealDamage(getM().tapDmg); spawnPetals(3);}
+function tapMonster(){if(!isDefeating) { dealDamage(getM().tapDmg); spawnPetals(3); }}
 
 function defeatMonster(){
+  isDefeating = false;
   if(st.mIdx<monsters.length-1){
     st.mIdx++; st.mHp=getM().maxHp; persist(); updateUI(); showLvUp(false);
   }else{
