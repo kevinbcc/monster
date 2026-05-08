@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="櫻花斬妖帖">
   <link rel="manifest" href="manifest.json">
-  <title>櫻花斬妖帖</title>
+  <title>打敗怪物</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
     *{box-sizing:border-box;margin:0;padding:0}
@@ -91,7 +91,7 @@
   <div class="content">
 
     <div class="header">
-      <div class="title">櫻花斬妖帖<small id="dateStr">今日的挑戰</small></div>
+      <div class="title">打敗怪物<small id="dateStr">今日的挑戰</small></div>
       <div class="streak"><div class="streak-n" id="streakN">0</div><div class="streak-l">天連勝</div></div>
     </div>
 
@@ -166,16 +166,38 @@ var encouragements = [
   '你比昨天的自己又勇敢一點了 🦋',
   '記得喝水，好好照顧自己 🌸',
   '今天的小努力，就是明天的力量 🌸',
-  '不管感覺怎樣，你今天都來了，這就夠了 🌸'
+  '不管感覺怎樣，你今天都來了，這就夠了 🌸',
+  '你的存在本身，就是一件美好的事 ✨',
+  '累了就休息一下，地球還是會轉的 🌍',
+  '把心裡的重擔輕輕放下吧 🍃',
+  '哪怕是微光，也是你發出的光芒 🌟',
+  '不要對自己太嚴格了，這世界已經夠難了 🫂',
+  '慢慢呼吸，感覺這份平靜 🎐',
+  '走得慢沒關係，至少你還在走 👣',
+  '你的感受都是真實而重要的 💖',
+  '今天辛苦了，抱抱自己吧 🤗',
+  '就算犯錯了，也是成長的一部分 🌱',
+  '把專注力拉回當下，一切安好 🍵',
+  '你的光芒不需要別人來定義 💫',
+  '有時候，什麼都不做也是一種選擇 🛋️',
+  '明天又是新的一天，會有新的希望 🌅'
 ];
 
-var monsters = [
-  {name:'Lv.1 焦慮小芽', maxHp:150, tapDmg:4, checkinDmg:40},
-  {name:'Lv.2 焦慮小童', maxHp:280, tapDmg:6, checkinDmg:70},
-  {name:'Lv.3 焦慮胖嘟', maxHp:450, tapDmg:9, checkinDmg:100},
-  {name:'Lv.4 焦慮大叔', maxHp:700, tapDmg:13, checkinDmg:140},
-  {name:'Lv.5 焦慮魔王', maxHp:1000, tapDmg:18, checkinDmg:180}
-];
+var monsters = [];
+for (var i = 1; i <= 100; i++) {
+  var mName = '焦慮小芽';
+  if (i >= 80) mName = '焦慮魔王';
+  else if (i >= 50) mName = '焦慮大叔';
+  else if (i >= 20) mName = '焦慮胖嘟';
+  else if (i >= 5) mName = '焦慮小童';
+
+  monsters.push({
+    name: 'Lv.' + i + ' ' + mName,
+    maxHp: 100 + Math.floor(Math.pow(i, 1.5) * 50),
+    tapDmg: 4 + Math.floor(i * 1.5),
+    checkinDmg: 40 + i * 15
+  });
+}
 
 var st = {mIdx:0, mHp:150, streak:0};
 var checkedDays = [];
