@@ -66,7 +66,7 @@
     .checkin-btn:active{transform:scale(0.97)}
     .checkin-btn.done-state{background:var(--gr);pointer-events:none}
 
-    /* ── Mood Picker (inline, shown after checkin) ── */
+    /* ── Mood Picker ── */
     .mood-row{width:100%;display:none;flex-direction:column;align-items:center;gap:8px}
     .mood-row.visible{display:flex}
     .mood-q{font-size:clamp(12px,3vw,14px);font-weight:800;color:var(--txt2)}
@@ -97,14 +97,18 @@
     .badges-title{font-size:clamp(10px,2.2vw,12px);font-weight:800;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-bottom:clamp(8px,2vw,14px);text-align:center}
     .badges-scroll{display:flex;gap:clamp(8px,2vw,14px);overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
     .badges-scroll::-webkit-scrollbar{display:none}
-    .badge-item{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;width:clamp(52px,14vw,70px)}
-    .badge-icon{width:clamp(40px,10vw,54px);height:clamp(40px,10vw,54px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(18px,5vw,24px);border:2px solid;position:relative;transition:all 0.3s}
-    .badge-icon.unlocked{background:linear-gradient(135deg,#FFF0F5,#FFE4EE);border-color:var(--sk2);box-shadow:0 2px 8px rgba(255,143,171,0.3)}
-    .badge-icon.locked{background:rgba(196,160,181,0.1);border-color:rgba(196,160,181,0.25);filter:grayscale(1);opacity:0.4}
-    .badge-name{font-size:clamp(8px,1.8vw,10px);font-weight:800;color:var(--txt3);text-align:center;line-height:1.2}
-    .badge-name.unlocked{color:var(--txt2)}
-    .new-badge-pop{position:fixed;top:clamp(60px,15vw,90px);left:50%;transform:translateX(-50%);background:var(--pu);color:white;border-radius:20px;padding:10px 20px;font-size:clamp(12px,3vw,14px);font-weight:900;z-index:300;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(196,160,224,0.5)}
-    .new-badge-pop.pop{animation:badgepop 2.5s ease forwards}
+    .badge-item{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:5px;width:clamp(60px,16vw,80px);cursor:default}
+    .badge-icon{width:clamp(46px,12vw,60px);height:clamp(46px,12vw,60px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,5.5vw,26px);border:2px solid;position:relative;transition:all 0.3s}
+    .badge-icon.unlocked{background:linear-gradient(135deg,#FFF0F5,#FFE4EE);border-color:var(--sk2);box-shadow:0 2px 10px rgba(255,143,171,0.25)}
+    .badge-icon.locked{background:rgba(196,160,181,0.08);border-color:rgba(196,160,181,0.2);filter:grayscale(1);opacity:0.35}
+    .badge-name{font-size:clamp(8px,1.9vw,11px);font-weight:800;color:var(--txt3);text-align:center;line-height:1.3}
+    .badge-name.unlocked{color:var(--sk2)}
+    .badge-desc{font-size:clamp(7px,1.6vw,9px);font-weight:700;color:var(--txt3);text-align:center;line-height:1.3;opacity:0.75}
+    .badge-desc.unlocked{opacity:1;color:var(--txt2)}
+
+    /* ── Badge unlock pop ── */
+    .new-badge-pop{position:fixed;top:clamp(60px,15vw,90px);left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#FFB7C5,#C4A0E0);color:white;border-radius:20px;padding:10px 22px;font-size:clamp(12px,3vw,14px);font-weight:900;z-index:300;opacity:0;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(255,143,171,0.4)}
+    .new-badge-pop.pop{animation:badgepop 2.8s ease forwards}
     @keyframes badgepop{0%{opacity:0;transform:translateX(-50%) translateY(10px) scale(0.85)}15%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}80%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-10px) scale(0.9)}}
 
     /* ── Overlays ── */
@@ -130,6 +134,11 @@
     .best-streak-row{background:linear-gradient(135deg,#FFF0F5,#FFE4EE);border-radius:12px;padding:clamp(10px,2.5vw,14px);text-align:center;margin-bottom:0;border:1.5px solid rgba(255,183,197,0.4)}
     .best-streak-row .n{font-size:clamp(22px,6vw,30px);font-weight:900;color:var(--sk2);line-height:1}
     .best-streak-row .l{font-size:clamp(10px,2.3vw,12px);font-weight:700;color:var(--txt3);margin-top:3px}
+
+    /* ── Badge tooltip ── */
+    .badge-item{position:relative}
+    .badge-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--txt);color:white;border-radius:10px;padding:6px 10px;font-size:10px;font-weight:700;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.2s;z-index:50;line-height:1.4;text-align:center;max-width:140px;white-space:normal}
+    .badge-item:hover .badge-tip{opacity:1}
   </style>
 </head>
 <body>
@@ -218,7 +227,7 @@
 
     <!-- Badges -->
     <div class="badges-box">
-      <div class="badges-title">成就徽章</div>
+      <div class="badges-title">✨ 小小紀念章</div>
       <div class="badges-scroll" id="badgesScroll"></div>
     </div>
 
@@ -238,17 +247,17 @@
   <!-- Stats Overlay -->
   <div class="overlay" id="statsOverlay">
     <div class="stats-card">
-      <div class="stats-card-title">⚔️ 我的戰績</div>
+      <div class="stats-card-title">🌸 我的旅程</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="best-streak-row">
           <div class="n" id="stBest">0</div>
-          <div class="l">🔥 最長連勝紀錄</div>
+          <div class="l">🌙 最長連續陪伴</div>
         </div>
         <div class="stats-grid">
-          <div class="stats-item"><div class="n" id="stDays">0</div><div class="l">📅 累積簽到天</div></div>
-          <div class="stats-item"><div class="n" id="stMonsters">0</div><div class="l">💀 消滅怪物數</div></div>
-          <div class="stats-item"><div class="n" id="stTaps">0</div><div class="l">👆 攻擊次數</div></div>
-          <div class="stats-item"><div class="n" id="stDmg">0</div><div class="l">💥 累積傷害</div></div>
+          <div class="stats-item"><div class="n" id="stDays">0</div><div class="l">🌷 出現的天數</div></div>
+          <div class="stats-item"><div class="n" id="stMonsters">0</div><div class="l">💨 趕走的焦慮</div></div>
+          <div class="stats-item"><div class="n" id="stTaps">0</div><div class="l">🌸 輕點的次數</div></div>
+          <div class="stats-item"><div class="n" id="stDmg">0</div><div class="l">✨ 累積的勇氣</div></div>
         </div>
       </div>
       <button class="stats-close" onclick="closeStats()">關閉</button>
@@ -263,23 +272,98 @@
 /* ── Data ── */
 var encouragements=['今天能來，就已經很厲害了 🌸','焦慮只是暫時的，你比它強大 ✨','每一次打卡都是對自己的溫柔 🌷','你不需要完美，只需要今天出現 🌸','小步前進也是前進，為你驕傲 🍀','深呼吸，今天的你已經很棒了 🌸','焦慮打不倒你，因為你每天都在 ✨','允許自己慢慢來，花開有時節 🌷','你比昨天的自己又勇敢一點了 🦋','記得喝水，好好照顧自己 🌸','今天的小努力，就是明天的力量 🌸','不管感覺怎樣，你今天都來了，這就夠了 🌸','你的存在本身，就是一件美好的事 ✨','累了就休息一下，地球還是會轉的 🌍','把心裡的重擔輕輕放下吧 🍃','哪怕是微光，也是你發出的光芒 🌟','不要對自己太嚴格了，這世界已經夠難了 🫂','慢慢呼吸，感覺這份平靜 🎐','走得慢沒關係，至少你還在走 👣','你的感受都是真實而重要的 💖','今天辛苦了，抱抱自己吧 🤗','就算犯錯了，也是成長的一部分 🌱','把專注力拉回當下，一切安好 🍵','你的光芒不需要別人來定義 💫','有時候，什麼都不做也是一種選擇 🛋️','明天又是新的一天，會有新的希望 🌅'];
 
-/* ── Badges Definition ── */
+/* ── Badges — warm & gentle, not gamey ── */
 var BADGES=[
-  {id:'first',icon:'🌱',name:'初出茅廬',desc:'完成第一次簽到',check:function(s){return s.totalCheckins>=1;}},
-  {id:'streak3',icon:'🔥',name:'三日之火',desc:'連續簽到3天',check:function(s){return s.bestStreak>=3;}},
-  {id:'streak7',icon:'🌸',name:'一週勇者',desc:'連續簽到7天',check:function(s){return s.bestStreak>=7;}},
-  {id:'streak14',icon:'🌙',name:'半月戰士',desc:'連續簽到14天',check:function(s){return s.bestStreak>=14;}},
-  {id:'streak30',icon:'🌟',name:'月之守護',desc:'連續簽到30天',check:function(s){return s.bestStreak>=30;}},
-  {id:'tap50',icon:'👊',name:'百拳少女',desc:'攻擊50次',check:function(s){return s.totalTaps>=50;}},
-  {id:'tap200',icon:'⚡',name:'閃電之手',desc:'攻擊200次',check:function(s){return s.totalTaps>=200;}},
-  {id:'monster1',icon:'⚔️',name:'初戰告捷',desc:'擊敗第1隻怪物',check:function(s){return s.monstersDefeated>=1;}},
-  {id:'monster5',icon:'🏆',name:'怪物獵人',desc:'擊敗5隻怪物',check:function(s){return s.monstersDefeated>=5;}},
-  {id:'monster20',icon:'👑',name:'怪物剋星',desc:'擊敗20隻怪物',check:function(s){return s.monstersDefeated>=20;}},
-  {id:'dmg1000',icon:'💫',name:'千傷達人',desc:'累積傷害1000',check:function(s){return s.totalDmg>=1000;}},
-  {id:'dmg10000',icon:'💎',name:'萬傷傳說',desc:'累積傷害10000',check:function(s){return s.totalDmg>=10000;}},
-  {id:'days10',icon:'🗓️',name:'簽到達人',desc:'累積簽到10天',check:function(s){return s.totalCheckins>=10;}},
-  {id:'days30',icon:'🌺',name:'鐵打之心',desc:'累積簽到30天',check:function(s){return s.totalCheckins>=30;}},
-  {id:'mood',icon:'💖',name:'心情日記',desc:'第一次記錄心情',check:function(s){return s.moodCount>=1;}}
+  {
+    id:'first',icon:'🌱',name:'第一步',
+    desc:'今天出現了，這就是最重要的一步',
+    unlock:'謝謝你今天來了 🌱\n踏出第一步，真的很勇敢。',
+    check:function(s){return s.totalCheckins>=1;}
+  },
+  {
+    id:'streak3',icon:'🕯️',name:'小小的光',
+    desc:'連續三天都出現了，像一盞溫柔的燈',
+    unlock:'連續三天都來了 🕯️\n就算只是一點點光，也足夠照亮自己。',
+    check:function(s){return s.bestStreak>=3;}
+  },
+  {
+    id:'streak7',icon:'🌷',name:'一週的你',
+    desc:'整整一週，每天都陪著自己',
+    unlock:'七天都在 🌷\n一週裡，每一天都是你給自己的禮物。',
+    check:function(s){return s.bestStreak>=7;}
+  },
+  {
+    id:'streak14',icon:'🌙',name:'靜靜的月光',
+    desc:'兩週了，月亮看見你每晚的溫柔',
+    unlock:'堅持了兩週 🌙\n月光都記得你每一個夜晚的樣子。',
+    check:function(s){return s.bestStreak>=14;}
+  },
+  {
+    id:'streak30',icon:'🌸',name:'整月的花',
+    desc:'一整個月，每天都溫柔地出現',
+    unlock:'一個月都在 🌸\n這份溫柔和堅持，讓你自己開出了花。',
+    check:function(s){return s.bestStreak>=30;}
+  },
+  {
+    id:'tap50',icon:'✋',name:'輕輕打過去',
+    desc:'攻擊了50次，每一下都是勇氣',
+    unlock:'50次攻擊 ✋\n每一下輕點，都是說「我不怕你」的聲音。',
+    check:function(s){return s.totalTaps>=50;}
+  },
+  {
+    id:'tap200',icon:'💫',name:'閃閃的手',
+    desc:'200次攻擊，你的手都在發光了',
+    unlock:'200次攻擊 💫\n閃閃的，那是你每次勇敢的痕跡。',
+    check:function(s){return s.totalTaps>=200;}
+  },
+  {
+    id:'monster1',icon:'🍃',name:'第一次趕走',
+    desc:'第一隻焦慮被你輕輕吹走了',
+    unlock:'趕走第一隻怪物 🍃\n焦慮只是一陣風，你把它吹走了。',
+    check:function(s){return s.monstersDefeated>=1;}
+  },
+  {
+    id:'monster5',icon:'🌈',name:'彩虹出來了',
+    desc:'五隻焦慮都趕走了，雨後見彩虹',
+    unlock:'趕走了5隻怪物 🌈\n那麼多風雨都過了，彩虹就是你。',
+    check:function(s){return s.monstersDefeated>=5;}
+  },
+  {
+    id:'monster20',icon:'🦋',name:'蝴蝶飛起來',
+    desc:'20隻焦慮，全部變成了蝴蝶飛走',
+    unlock:'趕走了20隻焦慮 🦋\n每隻怪物都變成蝴蝶了，因為你在。',
+    check:function(s){return s.monstersDefeated>=20;}
+  },
+  {
+    id:'days10',icon:'🫧',name:'十天的氣泡',
+    desc:'累積簽到10天，輕盈地浮著',
+    unlock:'累積10天簽到 🫧\n輕輕地，一天一天地，你一直都在。',
+    check:function(s){return s.totalCheckins>=10;}
+  },
+  {
+    id:'days30',icon:'🌺',name:'三十朵小花',
+    desc:'30天了，每天都開出一朵花',
+    unlock:'累積30天簽到 🌺\n三十朵花，全都是你開的，好美。',
+    check:function(s){return s.totalCheckins>=30;}
+  },
+  {
+    id:'mood',icon:'💌',name:'心情信',
+    desc:'第一次寫下今天的感受',
+    unlock:'第一次記錄心情 💌\n把感受說出來，就是對自己最溫柔的事。',
+    check:function(s){return s.moodCount>=1;}
+  },
+  {
+    id:'dmg1000',icon:'🌟',name:'千顆星星',
+    desc:'累積傷害破千，每一點都是光',
+    unlock:'累積傷害破千 🌟\n千顆星星，每一顆都是你的勇敢留下的。',
+    check:function(s){return s.totalDmg>=1000;}
+  },
+  {
+    id:'dmg10000',icon:'🌙✨',name:'月亮和星星',
+    desc:'累積傷害破萬，你照亮了整片天',
+    unlock:'累積傷害破萬 🌙✨\n月亮和星星都為你在閃亮。',
+    check:function(s){return s.totalDmg>=10000;}
+  }
 ];
 
 /* ── Monsters ── */
@@ -345,12 +429,11 @@ function showMoodPickerState(){
   if(moodData[todayKey()]){
     var saved=document.getElementById('moodSaved');
     saved.classList.add('show');
-    var moods={'happy':'😊','calm':'😌','sad':'😔','angry':'😤','tired':'😴'};
     var opts=document.querySelectorAll('.mood-opt');
     var todayMood=moodData[todayKey()];
+    var moodArr=['happy','calm','sad','angry','tired'];
     for(var i=0;i<opts.length;i++){
-      var m=['happy','calm','sad','angry','tired'][i];
-      if(m===todayMood)opts[i].classList.add('selected');
+      if(moodArr[i]===todayMood)opts[i].classList.add('selected');
     }
   }
 }
@@ -455,13 +538,13 @@ function checkBadges(){
   for(var j=0;j<newOnes.length;j++){
     (function(badge,delay){
       setTimeout(function(){popBadge(badge);},delay);
-    })(newOnes[j],j*2800);
+    })(newOnes[j],j*3000);
   }
 }
 
 function popBadge(badge){
   var el=document.getElementById('newBadgePop');
-  el.textContent='🎉 新徽章：'+badge.icon+' '+badge.name;
+  el.textContent=badge.icon+' '+badge.name+' — '+badge.unlock.split('\n')[0];
   el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
 }
 
@@ -471,11 +554,12 @@ function buildBadges(){
     var b=BADGES[i];
     var unlocked=unlockedBadges.indexOf(b.id)!==-1;
     var item=document.createElement('div');item.className='badge-item';
-    item.innerHTML='<div class="badge-icon '+(unlocked?'unlocked':'locked')+'">'+b.icon+'</div><div class="badge-name '+(unlocked?'unlocked':'')+'">'+b.name+'</div>';
-    if(unlocked){
-      item.title=b.desc;
-      item.querySelector('.badge-icon').style.animation='none';
-    }
+    var tipText=unlocked?b.unlock:b.desc;
+    item.innerHTML=
+      '<div class="badge-icon '+(unlocked?'unlocked':'locked')+'">'+b.icon+'</div>'+
+      '<div class="badge-name '+(unlocked?'unlocked':'')+'">'+b.name+'</div>'+
+      '<div class="badge-desc '+(unlocked?'unlocked':'')+'">'+b.desc+'</div>'+
+      '<div class="badge-tip">'+tipText.replace(/\n/g,'<br>')+'</div>';
     wrap.appendChild(item);
   }
 }
