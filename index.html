@@ -23,9 +23,63 @@
       --pu:#A8C5DA;
       --gr:#7A9E8A;
       --gold:#F5C842;
+      --bg-gradient: linear-gradient(180deg, var(--pt2) 0%, #FFFFFF 100%);
     }
-    html,body{width:100%;height:100%;min-height:100dvh;font-family:'Nunito',sans-serif;background:var(--pt2);color:var(--txt);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;overflow:hidden;position:fixed;}
-    .wrap{width:100%;max-width:100%;height:100%;max-height:100dvh;margin:0 auto;background:var(--pt2);position:relative;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:max(0px,env(safe-area-inset-top));padding-bottom:max(0px,env(safe-area-inset-bottom));}
+    body.theme-afternoon { 
+      --pt2: #FFF2E6; /* 溫潤奶黃 */
+      --sk: #FFB085;  /* 夕陽橘 */
+      --sk2: #E68A5C; /* 深夕陽橘 */
+      --txt: #5C4A3E; /* 深咖啡色文字 */
+      --txt2: #8C7A6E;/* 暖灰文字 */
+      --txt3: #BCAAA0;/* 淺暖灰文字 */
+      --card: #FFFAF5;/* 奶油色卡片 */
+      --pt: #FFF0E0;  /* 裝飾背景 */
+      --bg-gradient: linear-gradient(180deg, #FFF2E6 0%, #FFE0D0 100%);
+    }
+    body.theme-afternoon .monster-box, body.theme-afternoon .checkin-box, body.theme-afternoon .diary-box, body.theme-afternoon .calendar-box, body.theme-afternoon .badges-box, body.theme-afternoon .stat-cell, body.theme-afternoon .streak, body.theme-afternoon .lv-card, body.theme-afternoon .egg-card, body.theme-afternoon .diary-popup-card, body.theme-afternoon .stats-card {
+      background: var(--card);
+      border-color: rgba(230,138,92,0.15);
+      box-shadow: 0 4px 20px rgba(230,138,92,0.1);
+    }
+    body.theme-afternoon .monster-wrap svg { filter: drop-shadow(0 0 10px rgba(255,176,133,0.25)); }
+    body.theme-afternoon .diary-input, body.theme-afternoon .encourage, body.theme-afternoon .mood-aura, body.theme-afternoon .stats-item, body.theme-afternoon .best-streak-row {
+      background: rgba(255,255,255,0.4);
+      color: var(--txt);
+      border-color: rgba(230,138,92,0.1);
+    }
+
+    body.theme-night { 
+      --pt2: #14142B; /* 午夜深藍 */
+      --sk: #FFB7C5;  /* 亮櫻花粉 */
+      --sk2: #F2AABF; /* 霓虹粉 */
+      --txt: #F0F0F8; /* 冰藍白文字 */
+      --txt2: #A0A0C0;/* 藍灰文字 */
+      --txt3: #606080;/* 深藍灰文字 */
+      --card: rgba(30, 30, 60, 0.7); /* 半透明深藍卡片 */
+      --pt: #1E1E3C;  /* 裝飾底色 */
+      --bg-gradient: linear-gradient(180deg, #14142B 0%, #1E1E3C 100%);
+    }
+    body.theme-night .monster-box, body.theme-night .checkin-box, body.theme-night .diary-box, body.theme-night .calendar-box, body.theme-night .badges-box, body.theme-night .stat-cell, body.theme-night .streak, body.theme-night .lv-card, body.theme-night .egg-card, body.theme-night .diary-popup-card, body.theme-night .stats-card { 
+      background: var(--card); 
+      border-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    body.theme-night .diary-input, body.theme-night .encourage, body.theme-night .mood-aura, body.theme-night .stats-item, body.theme-night .best-streak-row { 
+      background: rgba(255, 255, 255, 0.04); 
+      color: var(--txt); 
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    body.theme-night .cal-day { background: rgba(255, 255, 255, 0.03); color: var(--txt3); }
+    body.theme-night .cal-day.today { border-color: var(--sk); }
+    body.theme-night .cal-day.done { background: rgba(242, 170, 191, 0.15); }
+    body.theme-night .stat-n, body.theme-night .streak-n, body.theme-night .title { color: var(--sk); text-shadow: 0 0 10px rgba(242, 170, 191, 0.3); }
+    body.theme-night .monster-wrap svg { filter: drop-shadow(0 0 12px rgba(242, 170, 191, 0.4)); }
+    body.theme-night .hp-track { background: rgba(255, 255, 255, 0.05); }
+
+    html,body{width:100%;height:100%;min-height:100dvh;font-family:'Nunito',sans-serif;background:var(--pt2);color:var(--txt);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;overflow:hidden;position:fixed;transition: background 1.5s ease;}
+    .wrap{width:100%;max-width:100%;height:100%;max-height:100dvh;margin:0 auto;background:var(--bg-gradient);position:relative;overflow:auto;-webkit-overflow-scrolling:touch;padding-top:max(0px,env(safe-area-inset-top));padding-bottom:max(0px,env(safe-area-inset-bottom));}
     .petals-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
     .pf{position:absolute;width:9px;height:9px;background:var(--sk);border-radius:50% 0 50% 0;animation:fall linear infinite}
     @keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:0.55}100%{transform:translateY(110vh) rotate(400deg);opacity:0}}
@@ -36,7 +90,7 @@
     .title{font-size:clamp(18px,5vw,28px);font-weight:900;color:var(--sk2)}
     .title small{display:block;font-size:clamp(11px,2.8vw,13px);font-weight:700;color:var(--txt3);margin-top:1px}
     .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-    .streak{background:white;border-radius:14px;padding:clamp(4px,1.2vw,8px) clamp(10px,3vw,18px);text-align:center;border:1.5px solid rgba(232,132,158,0.3);box-shadow:0 2px 12px rgba(242,170,191,0.18)}
+    .streak{background:var(--card);border-radius:14px;padding:clamp(4px,1.2vw,8px) clamp(10px,3vw,18px);text-align:center;border:1.5px solid rgba(232,132,158,0.3);box-shadow:0 2px 12px rgba(242,170,191,0.18)}
     .streak-n{font-size:clamp(20px,6vw,32px);font-weight:900;color:var(--sk2);line-height:1}
     .streak-l{font-size:clamp(10px,2.3vw,12px);font-weight:700;color:var(--txt3)}
     .stats-btn{background:var(--pu);color:white;border:none;border-radius:10px;padding:5px 12px;font-family:'Nunito',sans-serif;font-size:clamp(10px,2.5vw,12px);font-weight:800;cursor:pointer;box-shadow:0 2px 10px rgba(168,197,218,0.35)}
@@ -44,12 +98,12 @@
 
     /* Stats Bar */
     .stats-bar{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,1.5vw,10px)}
-    .stat-cell{background:white;border-radius:14px;border:1.5px solid rgba(232,132,158,0.18);padding:clamp(8px,2vw,12px);text-align:center;box-shadow:0 2px 10px rgba(242,170,191,0.12)}
+    .stat-cell{background:var(--card);border-radius:14px;border:1.5px solid rgba(232,132,158,0.18);padding:clamp(8px,2vw,12px);text-align:center;box-shadow:0 2px 10px rgba(242,170,191,0.12)}
     .stat-n{font-size:clamp(16px,4.5vw,22px);font-weight:900;color:var(--sk2);line-height:1}
     .stat-l{font-size:clamp(9px,2vw,11px);font-weight:700;color:var(--txt3);margin-top:2px}
 
     /* Monster Box */
-    .monster-box{width:100%;background:white;border-radius:clamp(16px,4vw,24px);border:1.5px solid rgba(232,132,158,0.2);padding:clamp(12px,3vw,20px);display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.8vw,10px);box-shadow:0 4px 20px rgba(242,170,191,0.15)}
+    .monster-box{width:100%;background:var(--card);border-radius:clamp(16px,4vw,24px);border:1.5px solid rgba(232,132,158,0.2);padding:clamp(12px,3vw,20px);display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.8vw,10px);box-shadow:0 4px 20px rgba(242,170,191,0.15)}
     .hp-row{width:100%;display:flex;justify-content:space-between;font-size:clamp(11px,2.8vw,14px);font-weight:800;color:var(--txt2)}
     .hp-track{width:100%;height:clamp(10px,2.5vw,14px);background:rgba(242,170,191,0.15);border-radius:20px;border:1.5px solid rgba(232,132,158,0.2);overflow:hidden}
     .hp-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--sk),var(--sk2));transition:width 0.7s cubic-bezier(.34,1.56,.64,1);position:relative}
@@ -59,9 +113,8 @@
     svg{transition:transform 0.1s;display:block;width:100%;height:100%}
     .monster-wrap.boing svg{animation:boing 0.4s cubic-bezier(.36,.07,.19,.97)}
     @keyframes boing{0%,100%{transform:translate(0,0)}20%{transform:translate(-5px,-3px) rotate(-4deg)}50%{transform:translate(5px,-2px) rotate(3deg)}80%{transform:translate(-3px,2px) rotate(-2deg)}}
-    .dmg-pop{position:absolute;top:10%;left:50%;transform:translateX(-50%);font-size:clamp(14px,4vw,22px);font-weight:900;color:var(--sk2);pointer-events:none;opacity:0;white-space:nowrap;z-index:10}
-    .dmg-pop.go{animation:popfloat 0.7s ease forwards}
-    @keyframes popfloat{0%{opacity:1;transform:translateX(-50%) scale(0.7) translateY(0)}50%{opacity:1;transform:translateX(-50%) scale(1.2) translateY(-20px)}100%{opacity:0;transform:translateX(-50%) scale(1) translateY(-44px)}}
+    .dmg-pop-v2{position:fixed;pointer-events:none;font-size:clamp(20px,5.5vw,30px);font-weight:900;color:var(--sk2);z-index:1000;text-shadow:0 2px 6px rgba(0,0,0,0.12);animation:popfloatV2 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards}
+    @keyframes popfloatV2{0%{opacity:0;transform:translate(-50%, -50%) scale(0.5)}20%{opacity:1;transform:translate(-50%, -80%) scale(1.3)}100%{opacity:0;transform:translate(-50%, -160%) scale(1)}}
     .monster-lbl{font-size:clamp(11px,2.8vw,13px);font-weight:800;color:var(--txt3)}
     .tap-hint{font-size:clamp(11px,2.5vw,13px);color:var(--txt3);font-weight:700}
     .mood-aura{font-size:clamp(10px,2.5vw,12px);font-weight:700;color:var(--txt2);padding:6px 16px;border-radius:20px;background:var(--pt);border:1px solid rgba(232,132,158,0.25);display:none;text-align:center;line-height:1.4;max-width:100%}
@@ -217,8 +270,7 @@
     <div class="monster-box">
       <div class="hp-row"><span id="monsterLbl">Lv.1 焦慮小芽</span><span id="hpTxt">150 / 150</span></div>
       <div class="hp-track"><div class="hp-fill" id="hpFill" style="width:100%"></div></div>
-      <div class="monster-wrap" id="monsterWrap" onclick="tapMonster()">
-        <div class="dmg-pop" id="dmgPop"></div>
+      <div class="monster-wrap" id="monsterWrap" onclick="tapMonster(event)">
         <svg id="monsterSvg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="80" cy="118" rx="40" ry="12" fill="rgba(242,170,191,0.18)"/>
           <circle cx="80" cy="92" r="36" id="mBodyOuter" fill="#FFD6E4"/>
@@ -405,7 +457,7 @@ var BADGES=[
   {id:'mood',icon:'💌',name:'心情信',desc:'第一次寫下今天的感受',unlock:'第一次記錄心情 💌\n把感受說出來，就是對自己最溫柔的事。',check:function(s){return s.moodCount>=1;}},
   {id:'diary',icon:'📖',name:'小日記',desc:'第一次寫下今天的心情日記',unlock:'第一次寫日記 📖\n把心裡的話說出來，你在用文字照顧自己。',check:function(s){return s.diaryCount>=1;}},
   {id:'dmg1000',icon:'🌟',name:'千顆星星',desc:'累積傷害破千，每一點都是光',unlock:'累積傷害破千 🌟\n千顆星星，每一顆都是你的勇敢留下的。',check:function(s){return s.totalDmg>=1000;}},
-  {id:'dmg10000',icon:'🌙✨',name:'月亮和星星',desc:'累積傷害破萬，你照亮了整片天',unlock:'累積傷害破萬 🌙✨\n月亮和星星都為你在閃亮。',check:function(s){return s.totalDmg>=10000;}}
+  {id:'dmg10000',icon:'🌌',name:'浩瀚星空',desc:'累積傷害破萬，你照亮了整片天',unlock:'累積傷害破萬 🌌\n月亮和星星都為你在閃亮。',check:function(s){return s.totalDmg>=10000;}}
 ];
 
 var monsters=[];
@@ -511,7 +563,23 @@ function applyMoodMonster(mood){
   aura.textContent=c.aura;aura.classList.add('visible');
 }
 
-function animDmg(n){var p=document.getElementById('dmgPop');p.textContent='-'+n+'!';p.classList.remove('go');void p.offsetWidth;p.classList.add('go');}
+function vibrate(ms){if(navigator.vibrate)navigator.vibrate(ms);}
+function updateEnvironment(){
+  var h=new Date().getHours(),b=document.body;
+  b.classList.remove('theme-morning','theme-afternoon','theme-night');
+  if(h>=18||h<6)b.classList.add('theme-night');
+  else if(h>=15)b.classList.add('theme-afternoon');
+  else b.classList.add('theme-morning');
+}
+
+function animDmg(n,x,y){
+  var p=document.createElement('div');
+  p.className='dmg-pop-v2';p.textContent='-'+n+'!';
+  p.style.left=(x||window.innerWidth/2)+'px';
+  p.style.top=(y||window.innerHeight/2)+'px';
+  document.body.appendChild(p);
+  setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p);},800);
+}
 function shakeMonster(){
   var w=document.getElementById('monsterWrap');w.classList.remove('boing');void w.offsetWidth;w.classList.add('boing');
   setTimeout(function(){w.classList.remove('boing');},450);
@@ -522,15 +590,21 @@ function shakeMonster(){
   setTimeout(function(){document.getElementById('sweat').setAttribute('opacity','0');},900);
 }
 var isDefeating=false;
-function dealDamage(dmg){
+function dealDamage(dmg,x,y){
   if(isDefeating)return;
   st.mHp=Math.max(0,st.mHp-dmg);st.totalDmg+=dmg;
-  animDmg(dmg);shakeMonster();updateUI();persist();checkBadges();
+  animDmg(dmg,x,y);shakeMonster();updateUI();persist();checkBadges();
   if(st.mHp<=0){isDefeating=true;setTimeout(defeatMonster,700);}
 }
-function tapMonster(){if(!isDefeating){st.totalTaps++;dealDamage(getM().tapDmg);spawnPetals(3);persist();checkBadges();}}
+function tapMonster(e){
+  if(isDefeating)return;
+  st.totalTaps++;
+  var x=e?e.clientX:null,y=e?e.clientY:null;
+  vibrate(12);dealDamage(getM().tapDmg,x,y);spawnPetals(3);persist();checkBadges();
+}
 function defeatMonster(){
   isDefeating=false;st.monstersDefeated++;persist();checkBadges();
+  vibrate([100,50,150]);
   pendingEggPrize=EGG_PRIZES[Math.floor(Math.random()*EGG_PRIZES.length)];
   if(st.mIdx<monsters.length-1){pendingLvup=true;pendingLast=false;st.mIdx++;st.mHp=getM().maxHp;persist();updateUI();}
   else{pendingLvup=true;pendingLast=true;}
@@ -548,12 +622,13 @@ function showEgg(){
   spawnPetals(8);
 }
 function tapEgg(){
-  eggTaps++;
+  eggTaps++;vibrate(20);
   var em=document.getElementById('eggEmoji');
   em.classList.remove('shake');void em.offsetWidth;em.classList.add('shake');
   if(eggTaps===1){document.getElementById('eggHint').textContent='再敲一下！';}
   else if(eggTaps===2){em.textContent='🐣';document.getElementById('eggHint').textContent='快出來了！';}
   else{
+    vibrate(40);
     em.classList.remove('shake');void em.offsetWidth;em.classList.add('crack');
     setTimeout(function(){
       document.getElementById('eggShell').style.display='none';
@@ -562,7 +637,7 @@ function tapEgg(){
       document.getElementById('eggPrizeMsg').textContent=p.msg;
       document.getElementById('eggPrizeSub').textContent=p.sub;
       document.getElementById('eggPrize').classList.add('show');
-      spawnPetals(18);
+      spawnPetals(18);vibrate([50,30,50]);
     },580);
   }
 }
@@ -574,6 +649,7 @@ function closeEgg(){
 function doCheckIn(){
   var today=todayKey();
   if(checkedDays.indexOf(today)!==-1)return;
+  vibrate(30);
   checkedDays.push(today);st.totalCheckins++;
   var yest=new Date();yest.setDate(yest.getDate()-1);
   var yk=yest.getFullYear()+'-'+(yest.getMonth()+1)+'-'+yest.getDate();
@@ -587,6 +663,7 @@ function doCheckIn(){
 
 function saveMood(mood){
   var today=todayKey(),wasFirst=Object.keys(moodData).length===0;
+  vibrate(15);
   moodData[today]=mood;
   if(wasFirst||st.moodCount===0)st.moodCount=1;else st.moodCount++;
   persist();
@@ -621,6 +698,7 @@ function onDiaryInput(){
 }
 function saveDiary(){
   var v=document.getElementById('diaryInput').value.trim();if(!v)return;
+  vibrate(25);
   var today=todayKey();
   var isFirst=Object.keys(diaryEntries).length===0||st.diaryCount===0;
   diaryEntries[today]=v;
@@ -632,6 +710,7 @@ function saveDiary(){
 
 function openDiaryPopup(key,d,m,y){
   var moodEmojis={happy:'😊',calm:'😌',sad:'😔',angry:'😤',tired:'😴'};
+  vibrate(10);
   document.getElementById('diaryPopupDate').textContent=y+'年'+m+'月'+d+'日';
   document.getElementById('diaryPopupMood').textContent=moodData[key]?moodEmojis[moodData[key]]||'':'';
   var text=diaryEntries[key];
@@ -656,7 +735,7 @@ function checkBadges(){
   if(newOnes.length){persist();buildBadges();}
   for(var j=0;j<newOnes.length;j++){(function(b,delay){setTimeout(function(){popBadge(b);},delay);})(newOnes[j],j*3000);}
 }
-function popBadge(badge){var el=document.getElementById('newBadgePop');el.textContent=badge.icon+' '+badge.name+' — '+badge.unlock.split('\n')[0];el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+function popBadge(badge){var el=document.getElementById('newBadgePop');el.textContent=badge.icon+' '+badge.name+' — '+badge.unlock.split('\n')[0];el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');vibrate([30,50,30]);}
 function buildBadges(){
   var wrap=document.getElementById('badgesScroll');wrap.innerHTML='';
   for(var i=0;i<BADGES.length;i++){
@@ -669,6 +748,7 @@ function buildBadges(){
 }
 
 function showLvUp(last){
+  vibrate([100,50,100,50,200]);
   document.getElementById('lvTitle').textContent=last?'你打倒焦慮魔王了！':getM().name+' 出現了！';
   document.getElementById('lvSub').textContent=last?'所有焦慮都被你打跑了，你超棒的！🌸':'擊敗上一關！新的挑戰在等你～';
   document.getElementById('overlay').classList.add('show');
@@ -678,6 +758,7 @@ function showLvUp(last){
 function closeLvup(){document.getElementById('overlay').classList.remove('show');}
 
 function openStats(){
+  vibrate(10);
   document.getElementById('stBest').textContent=st.bestStreak;
   document.getElementById('stDays').textContent=st.totalCheckins;
   document.getElementById('stMonsters').textContent=st.monstersDefeated;
@@ -724,7 +805,7 @@ function buildCalendar(){
 
 function initDate(){var d=new Date(),days=['日','一','二','三','四','五','六'];document.getElementById('dateStr').textContent=(d.getMonth()+1)+'月'+d.getDate()+'日（週'+days[d.getDay()]+'）';}
 function initBgPetals(){var bg=document.getElementById('petalsArea');for(var i=0;i<8;i++){var p=document.createElement('div');p.className='pf';p.style.left=(Math.random()*100)+'%';p.style.animationDuration=(5+Math.random()*4)+'s';p.style.animationDelay=(-Math.random()*8)+'s';p.style.opacity=(0.15+Math.random()*0.25);bg.appendChild(p);}}
-initDate();initBgPetals();loadData();
+initDate();initBgPetals();loadData();updateEnvironment();
 </script>
 </body>
 </html>
