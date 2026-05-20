@@ -483,7 +483,7 @@ for(var i=1;i<=100;i++){
   monsters.push({name:'Lv.'+i+' '+mn,maxHp:100+Math.floor(Math.pow(i,1.5)*50),tapDmg:4+Math.floor(i*1.5),checkinDmg:40+i*15});
 }
 
-var st={mIdx:0,mHp:150,streak:0,bestStreak:0,totalTaps:0,totalDmg:0,monstersDefeated:0,totalCheckins:0,moodCount:0,diaryCount:0};
+var st={mIdx:0,mHp:150,streak:0,bestStreak:0,totalTaps:0,totalDmg:0,monstersDefeated:0,totalCheckins:0,moodCount:0,diaryCount:0,todayMsg:''};
 var checkedDays=[],moodData={},unlockedBadges={},diaryEntries={};
 var eggTaps=0,pendingEggPrize=null,pendingLvup=false,pendingLast=false;
 
@@ -491,14 +491,21 @@ function todayKey(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)
 function getM(){return monsters[Math.min(st.mIdx,monsters.length-1)];}
 
 function loadData(){
-  try{var r=localStorage.getItem('sakura_st');if(r)st=Object.assign({mIdx:0,mHp:150,streak:0,bestStreak:0,totalTaps:0,totalDmg:0,monstersDefeated:0,totalCheckins:0,moodCount:0,diaryCount:0},JSON.parse(r));}catch(e){}
+  try{var r=localStorage.getItem('sakura_st');if(r)st=Object.assign({mIdx:0,mHp:150,streak:0,bestStreak:0,totalTaps:0,totalDmg:0,monstersDefeated:0,totalCheckins:0,moodCount:0,diaryCount:0,todayMsg:''},JSON.parse(r));}catch(e){}
   try{var r=localStorage.getItem('sakura_days');if(r)checkedDays=JSON.parse(r);}catch(e){}
   try{var r=localStorage.getItem('sakura_mood');if(r)moodData=JSON.parse(r);}catch(e){}
   try{var r=localStorage.getItem('sakura_badges');if(r)unlockedBadges=JSON.parse(r);}catch(e){}
   try{var r=localStorage.getItem('sakura_diary');if(r)diaryEntries=JSON.parse(r);}catch(e){}
-  updateUI();checkCheckinState();buildCalendar();buildBadges();loadDiaryToday();
+  
   var today=todayKey();
-  if(checkedDays.indexOf(today)!==-1)showMoodPickerState();
+  if(checkedDays.indexOf(today)!==-1){
+    if(st.todayMsg) document.getElementById('encourageTxt').textContent=st.todayMsg;
+    showMoodPickerState();
+  } else {
+    st.todayMsg = ''; // 新的一天清空
+  }
+
+  updateUI();checkCheckinState();buildCalendar();buildBadges();loadDiaryToday();
   applyMoodMonster(moodData[today]||null);
 }
 function persist(){
